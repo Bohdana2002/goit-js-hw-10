@@ -12,6 +12,7 @@ const refs = {
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
 };
+refs.dataStartBtn.setAttribute('disabled', 'disabled');
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -39,6 +40,7 @@ const updateTimer = () => {
   const difference = userSelectedDate - Date.now();
   if (difference <= 0) {
     clearInterval(intervalId);
+    refs.dataInput.removeAttribute('disabled');
     return;
   }
   const { days, hours, minutes, seconds } = convertMs(difference);
@@ -51,6 +53,7 @@ const startTimer = () => {
   updateTimer();
   intervalId = setInterval(updateTimer, 1000);
   refs.dataStartBtn.setAttribute('disabled', 'disabled');
+  refs.dataInput.setAttribute('disabled', 'disabled');
 };
 refs.dataStartBtn.addEventListener('click', startTimer);
 function convertMs(ms) {
