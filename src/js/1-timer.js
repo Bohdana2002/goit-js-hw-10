@@ -12,6 +12,9 @@ const refs = {
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
 };
+let intervalId = null;
+let userSelectedDate = null;
+
 refs.dataStartBtn.setAttribute('disabled', 'disabled');
 const options = {
   enableTime: true,
@@ -33,9 +36,6 @@ const options = {
   },
 };
 flatpickr(refs.dataInput, options);
-let intervalId = null;
-let userSelectedDate = null;
-
 const updateTimer = () => {
   const difference = userSelectedDate - Date.now();
   if (difference <= 0) {
